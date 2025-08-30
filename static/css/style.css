@@ -1,0 +1,38 @@
+/* Definindo uma fonte mais moderna para todo o corpo da página */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa; /* Um cinza bem claro como cor de fundo */
+}
+
+/* Estilo para o container principal que vai segurar nosso formulário */
+.main-container {
+    max-width: 700px; /* Limita a largura para melhor leitura */
+    margin-top: 3rem; /* Espaçamento do topo */
+}
+
+/* Efeito de "card" para o formulário, com sombra para dar profundidade */
+.form-card {
+    background-color: white;
+    border-radius: 15px; /* Bordas mais arredondadas */
+    padding: 2.5rem; /* Espaçamento interno generoso */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    border: none; /* Remove a borda padrão */
+}
+
+/* Estilo para a área de resultados */
+#resultado {
+    background-color: #f8f9fa;
+    border: 1px dashed #dee2e6;
+    border-radius: 10px;
+    padding: 1.5rem;
+}
+
+/* Estilo para a sugestão de resposta, para destacá-la */
+.sugestao-resposta {
+    font-style: italic;
+    color: #495057;
+    background-color: #e9ecef;
+    padding: 1rem;
+    border-left: 5px solid #0d6efd; /* Uma barra azul à esquerda */
+    border-radius: 5px;
+}

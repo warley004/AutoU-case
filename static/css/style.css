@@ -1,3 +1,28 @@
+
+:root {
+    --bg-color: #f8f9fa;
+    --card-bg-color: #ffffff;
+    --text-color: #212529;
+    --muted-text-color: #6c757d;
+    --border-color: #dee2e6;
+    --accent-color: #0d6efd;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --suggestion-bg-color: #e9ecef;
+}
+
+/* TEMA ESCURO (Quando a classe .dark-theme for aplicada no body) */
+body.dark-theme {
+    --bg-color: #121212;
+    --card-bg-color: #1e1e1e;
+    --text-color: #e0e0e0;
+    --muted-text-color: #888;
+    --border-color: #444;
+    --accent-color: #00aaff;
+    --shadow-color: rgba(0, 0, 0, 0.4);
+    --suggestion-bg-color: #2c2c2c;
+}
+
+
 /* Definindo uma fonte mais moderna para todo o corpo da página */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

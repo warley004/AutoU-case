@@ -1,9 +1,9 @@
 # AutoU Case Prático: Analisador de E-mails com IA
 
 ![Live Demo](https://img.shields.io/badge/Live_Demo-Visitar-brightgreen?style=for-the-badge)  
-**[Visite a aplicação online aqui!]([COLE A URL DO SEU PROJETO NO RENDER AQUI])**
+**[Visite a aplicação online aqui!]([https://autou-case-warley.onrender.com/])**
 
-![Prévia da Aplicação](https://i.imgur.com/your-screenshot-url.png)
+![Prévia da Aplicação](https://1drv.ms/i/c/c194332f003eefbd/EeYcd6h4rSpBtmLXl4S_6wIBQsWqxbHA_kAqYDW2JIhr5g?e=aXGav9)
 _**Dica:** Tire um print da sua aplicação no tema escuro e substitua o link acima para deixar seu README ainda mais atrativo!_
 
 ---
@@ -47,7 +47,7 @@ Para executar este projeto no seu ambiente local, siga os passos abaixo:
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://github.com/seu-usuario/AutoU-case.git](https://github.com/seu-usuario/AutoU-case.git)
+    git clone [https://github.com/seu-usuario/AutoU-case.git](https://github.com/warley004/AutoU-case)
     cd AutoU-case
     ```
 
@@ -83,7 +83,7 @@ Para executar este projeto no seu ambiente local, siga os passos abaixo:
 
 ## 👨‍💻 Autor
 
-Desenvolvido por **[SEU NOME AQUI]**.
+Desenvolvido por **Warley Vieira**.
 
-* **LinkedIn:** `[link-para-seu-linkedin]`
-* **GitHub:** `[link-para-seu-github]`
+* **LinkedIn:** `https://www.linkedin.com/in/warley-vieira/`
+* **GitHub:** `https://github.com/warley004`

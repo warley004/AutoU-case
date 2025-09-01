@@ -1,13 +1,5 @@
 # AutoU Case Prático: Analisador de E-mails com IA
 
-![Live Demo](https://img.shields.io/badge/Live_Demo-Visitar-brightgreen?style=for-the-badge)  
-**[Visite a aplicação online aqui!]([https://autou-case-warley.onrender.com/])**
-
-![Prévia da Aplicação](https://1drv.ms/i/c/c194332f003eefbd/EeYcd6h4rSpBtmLXl4S_6wIBQsWqxbHA_kAqYDW2JIhr5g?e=aXGav9)
-_**Dica:** Tire um print da sua aplicação no tema escuro e substitua o link acima para deixar seu README ainda mais atrativo!_
-
----
-
 ## 📄 Descrição
 
 Este projeto é uma solução web desenvolvida como parte do processo seletivo da AutoU. A aplicação utiliza inteligência artificial para classificar e-mails em categorias de produtividade e sugerir respostas automáticas, otimizando o fluxo de trabalho e liberando tempo da equipe.

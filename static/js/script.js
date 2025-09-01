@@ -1,68 +1,69 @@
-// Aguarda o documento HTML ser completamente carregado antes de executar o script
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Seleciona os elementos do HTML com os quais vamos interagir
     const form = document.getElementById('email-form');
     const resultadoDiv = document.getElementById('resultado');
     const loadingSpinner = document.getElementById('loading-spinner');
     const conteudoResultado = document.getElementById('conteudo-resultado');
+    const emailFileInput = document.getElementById('email_file');
+    const clearFileBtn = document.getElementById('clear-file-btn');
 
-    // Adiciona um "escutador" para o evento de 'submit' (envio) do formulário
+    emailFileInput.addEventListener('change', () => {
+        if (emailFileInput.files.length > 0) {
+            clearFileBtn.classList.remove('d-none');
+        } else {
+            clearFileBtn.classList.add('d-none');
+        }
+    });
+
+    clearFileBtn.addEventListener('click', () => {
+        emailFileInput.value = ''; 
+        clearFileBtn.classList.add('d-none');
+    });
+
     form.addEventListener('submit', async (event) => {
-        // Previne o comportamento padrão do formulário, que é recarregar a página
         event.preventDefault();
 
-        // Limpa resultados anteriores e mostra o spinner de carregamento
-        conteudoResultado.innerHTML = '';
-        resultadoDiv.classList.remove('d-none'); // Mostra a seção de resultados
-        loadingSpinner.classList.remove('d-none'); // Mostra o spinner
+        const emailTextInput = document.getElementById('email_text');
+        const emailFileInput = document.getElementById('email_file');
+        const textValue = emailTextInput.value.trim();
+        const fileSelected = emailFileInput.files.length > 0;
 
-        // Cria um objeto FormData a partir do formulário. Isso pega todos os dados,
-        // incluindo o texto e o arquivo, se houver.
+        if (textValue !== '' && fileSelected) {
+            showAlertModal('Por favor, preencha apenas UM dos campos: ou o texto do e-mail ou o arquivo. Limpe um dos campos para continuar.');
+            return;
+        }
+
+        conteudoResultado.innerHTML = '';
+        resultadoDiv.classList.remove('d-none');
+        loadingSpinner.classList.remove('d-none');
+
         const formData = new FormData(form);
 
         try {
-            // Faz a requisição para o nosso backend na rota '/analisar'
-            // Usamos 'await' para esperar a resposta chegar antes de continuar
             const response = await fetch('/analisar', {
                 method: 'POST',
-                body: formData, // Envia os dados do formulário no corpo da requisição
+                body: formData,
             });
 
-            // Converte a resposta do backend (que é JSON) em um objeto JavaScript
             const data = await response.json();
-
-            // Esconde o spinner de carregamento
             loadingSpinner.classList.add('d-none');
 
-            // Verifica se a resposta do backend contém um erro
             if (response.status !== 200 || data.error) {
-                exibirResultado(
-                    'Erro', 
-                    data.error || 'Ocorreu um erro desconhecido. Tente novamente.',
-                    true // Indica que é uma mensagem de erro
-                );
+                exibirResultado('Erro', data.error || 'Ocorreu um erro desconhecido.', true);
             } else {
-                // Se deu tudo certo, exibe a classificação e a sugestão de resposta
                 exibirResultado(data.categoria, data.sugestao_resposta);
             }
 
         } catch (error) {
-            // Se a requisição falhar (ex: problema de rede), exibe um erro
             loadingSpinner.classList.add('d-none');
-            exibirResultado('Erro de Conexão', 'Não foi possível se conectar ao servidor. Verifique sua conexão e tente novamente.', true);
+            exibirResultado('Erro de Conexão', 'Não foi possível se conectar ao servidor.', true);
             console.error('Erro na requisição:', error);
         }
     });
 
-    /**
-     * Função auxiliar para formatar e exibir o resultado na tela.
-     */
     function exibirResultado(categoria, sugestao, isError = false) {
-        // Define a cor do "badge" da categoria (azul para produtivo, cinza para improdutivo, vermelho para erro)
         const badgeClass = isError ? 'bg-danger' : (categoria === 'Produtivo' ? 'bg-primary' : 'bg-secondary');
 
-        // Cria o HTML que será inserido na página com o resultado
         const resultadoHTML = `
             <div class="mb-3">
                 <h5>Classificação: <span class="badge ${badgeClass}">${categoria}</span></h5>
@@ -73,17 +74,22 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
 
-        // Insere o HTML gerado dentro da div de conteúdo do resultado
         conteudoResultado.innerHTML = resultadoHTML;
     }
 
-    // --- LÓGICA DO SELETOR DE TEMA ---
+    const alertModal = new bootstrap.Modal(document.getElementById('alertModal'));
+    const alertModalBody = document.getElementById('alertModalBody');
+
+    function showAlertModal(message) {
+        alertModalBody.textContent = message;
+        alertModal.show();
+    }
+
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
     const darkIcon = document.getElementById('theme-icon-dark');
     const lightIcon = document.getElementById('theme-icon-light');
 
-// Função para aplicar o tema salvo
     const applyTheme = (theme) => {
         if (theme === 'dark') {
             body.classList.add('dark-theme');
@@ -96,16 +102,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Verifica se já existe um tema salvo no localStorage
     const savedTheme = localStorage.getItem('theme') || 'light';
     applyTheme(savedTheme);
 
-    // Adiciona o evento de clique no botão
     themeToggle.addEventListener('click', () => {
+
         const isDark = body.classList.contains('dark-theme');
         const newTheme = isDark ? 'light' : 'dark';
 
-        // Aplica o novo tema e salva no localStorage
         applyTheme(newTheme);
         localStorage.setItem('theme', newTheme);
     });

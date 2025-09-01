@@ -1,63 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 
 :root {
-    --bg-color: #f8f9fa;
-    --card-bg-color: #ffffff;
-    --text-color: #212529;
-    --muted-text-color: #6c757d;
-    --border-color: #dee2e6;
+    --bg-color: #f4f7fc;
+    --card-bg-color: rgba(255, 255, 255, 0.95);
+    --text-color: #1d2129;
+    --muted-text-color: #606770;
+    --border-color: #dfe4ea;
     --accent-color: #0d6efd;
+    --accent-glow-color: rgba(13, 110, 253, 0.2);
     --shadow-color: rgba(0, 0, 0, 0.1);
-    --suggestion-bg-color: #e9ecef;
+    --suggestion-bg-color: #eef2f7;
+    --input-bg-color: #ffffff;
 }
 
-/* TEMA ESCURO (Quando a classe .dark-theme for aplicada no body) */
 body.dark-theme {
-    --bg-color: #121212;
-    --card-bg-color: #1e1e1e;
-    --text-color: #e0e0e0;
-    --muted-text-color: #888;
-    --border-color: #444;
+    --bg-color: #020c14;
+    --card-bg-color: rgba(16, 32, 48, 0.7);
+    --text-color: #f0f0f0;
+    --muted-text-color: #a0a0a0;
+    --border-color: rgba(0, 170, 255, 0.3);
     --accent-color: #00aaff;
-    --shadow-color: rgba(0, 0, 0, 0.4);
-    --suggestion-bg-color: #2c2c2c;
+    --accent-glow-color: rgba(0, 170, 255, 0.25);
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --suggestion-bg-color: rgba(44, 44, 44, 0.7);
+    --input-bg-color: rgba(51, 51, 51, 0.7);
 }
 
-
-/* Definindo uma fonte mais moderna para todo o corpo da página */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa; /* Um cinza bem claro como cor de fundo */
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.4s, color 0.4s;
+    overflow-x: hidden; 
 }
 
-/* Estilo para o container principal que vai segurar nosso formulário */
+body.dark-theme::before {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(0, 170, 255, 0.15) 0%, rgba(0, 170, 255, 0) 60%);
+    z-index: -1;
+    pointer-events: none;
+}
+
 .main-container {
-    max-width: 700px; /* Limita a largura para melhor leitura */
-    margin-top: 3rem; /* Espaçamento do topo */
+    max-width: 700px;
+    margin-top: 3rem;
 }
 
-/* Efeito de "card" para o formulário, com sombra para dar profundidade */
 .form-card {
-    background-color: white;
-    border-radius: 15px; /* Bordas mais arredondadas */
-    padding: 2.5rem; /* Espaçamento interno generoso */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    border: none; /* Remove a borda padrão */
+    background-color: var(--card-bg-color);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 40px var(--shadow-color);
+    border: 1px solid var(--border-color);
+    transition: all 0.4s;
+    backdrop-filter: blur(10px); 
 }
 
-/* Estilo para a área de resultados */
+.form-label, .lead.text-muted, small.text-muted {
+    color: var(--muted-text-color) !important;
+}
+
+.form-control {
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+}
+.form-control:focus {
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 0.25rem var(--accent-glow-color);
+}
+.form-control::placeholder {
+    color: var(--muted-text-color);
+    opacity: 0.7;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    font-weight: 500;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 170, 255, 0.2);
+}
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 170, 255, 0.3);
+}
+
+
 #resultado {
-    background-color: #f8f9fa;
-    border: 1px dashed #dee2e6;
-    border-radius: 10px;
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
     padding: 1.5rem;
+    margin-bottom: 3rem;
+    backdrop-filter: blur(10px);
 }
 
-/* Estilo para a sugestão de resposta, para destacá-la */
 .sugestao-resposta {
-    font-style: italic;
-    color: #495057;
-    background-color: #e9ecef;
+    font-style: normal; 
+    color: var(--text-color);
+    background-color: var(--suggestion-bg-color);
     padding: 1rem;
-    border-left: 5px solid #0d6efd; /* Uma barra azul à esquerda */
-    border-radius: 5px;
+    border-left: 4px solid var(--accent-color);
+    border-radius: 8px;
+    transition: all 0.4s;
+}
+
+.theme-switcher {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+}
+#theme-toggle {
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.file-input-wrapper {
+    position: relative;
+}
+
+#clear-file-btn {
+    position: absolute;
+    top: 70%; 
+    right: 1rem; 
+    transform: translateY(-50%);
+    z-index: 10; 
+    
+    filter: invert(0) grayscale(100%) brightness(200%);
+}
+
+body.dark-theme #clear-file-btn {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+#clear-file-btn:focus {
+    box-shadow: none; 
+}
+
+body.dark-theme .modal-content {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+}
+
+body.dark-theme .modal-header,
+body.dark-theme .modal-footer {
+    border-bottom-color: var(--border-color);
+    border-top-color: var(--border-color);
+}
+
+body.dark-theme .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
 }
